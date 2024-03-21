@@ -9,7 +9,7 @@ green='\e[0;32m'
 yell='\e[1;33m'
 tyblue='\e[1;36m'
 NC='\e[0m'
-clear
+echo -e "Thanks to SAN"
 # < GET IP INFORMATION >
 export IP=$( curl -sS ipinfo.io/ip )
 
@@ -34,18 +34,18 @@ read -rp "Input domain kamu : " -e dns
 if [ -z $dns ]; then
 echo -e "Nothing input for domain!"
 else
-echo "$dns" > /usr/local/etc/xray/domain
+echo "$dns" > /etc/xray/domain
 echo "DNS=$dns" > /var/lib/dnsvps.conf
 echo "$dns" > /root/domain
 fi
-clear
+echo -e "Thanks to SAN"
 
 # < Install dependencies >
 apt install -y wget screen
 apt update -y && apt upgrade -y
 apt install lolcat -y
 gem install lolcat
-clear
+
 # < CEK OPERATING SYSTEM >
 if [[ $( uname -m | awk '{print $1}' ) == "x86_64" ]]; then
     echo -e "${OK} Your Architecture Is Supported ( ${green}$( uname -m )${NC} )"
@@ -62,11 +62,11 @@ else
     echo -e "${EROR} Your OS Is Not Supported ( ${YELLOW}$( cat /etc/os-release | grep -w PRETTY_NAME | head -n1 | sed 's/=//g' | sed 's/"//g' | sed 's/PRETTY_NAME//g' )${NC} )"
     exit 1
 fi
-clear
+echo -e "Thanks to SAN"
 
 # < AMBIL INFORMASI REPOSITORY >   
     REPO="https://raw.githubusercontent.com/Paper890/ScriptVPN/main/"
-clear
+echo -e "Thanks to SAN"
 
 # < WAKTU INSTALASI >
 start=$(date +%s)
@@ -80,7 +80,7 @@ secs_to_human() {
     else
         print_error "The current user is not the root user, please switch to the root user and run the script again"
     fi
-clear
+echo -e "Thanks to SAN"
 
 # < MEBUAT DIREKTORY XRAY >
 echo -e "$(green)[ SEDANG MEMBBUAT DIREKTORY XRAY ]$(NC)"
@@ -97,7 +97,7 @@ echo -e "$(green)[ SEDANG MEMBBUAT DIREKTORY XRAY ]$(NC)"
     touch /var/log/xray/access.log
     touch /var/log/xray/error.log
     mkdir -p /var/lib/san >/dev/null 2>&1
-clear
+echo -e "Thanks to SAN"
 
 # < INSTALL GO TOP >
 echo -e "$(green)[ INSTALLING GO TOP ]$(NC)"
@@ -105,7 +105,7 @@ echo -e "$(green)[ INSTALLING GO TOP ]$(NC)"
     gotop_link="https://github.com/xxxserxxx/gotop/releases/download/v$gotop_latest/gotop_v"$gotop_latest"_linux_amd64.deb"
     curl -sL "$gotop_link" -o /tmp/gotop.deb
     dpkg -i /tmp/gotop.deb >/dev/null 2>&1
-clear
+echo -e "Thanks to SAN"
 
 # < MEMBUAT SWAB MEMORY SEBESAR 1GB >
 echo -e "$(green)[ SEDANG MEMBBUAT SWAB 1GB ]$(NC)"
@@ -115,15 +115,15 @@ echo -e "$(green)[ SEDANG MEMBBUAT SWAB 1GB ]$(NC)"
     chmod 0600 /swapfile >/dev/null 2>&1
     swapon /swapfile >/dev/null 2>&1
     sed -i '$ i\/swapfile      swap swap   defaults    0 0' /etc/fstab
-clear
+echo -e "Thanks to SAN"
 
 # < INSTALL BBR >
 echo -e "$(green)[ INSTALLING BBR ]$(NC)"
 wget ${REPO}tools/bbr.sh &&  chmod +x bbr.sh && ./bbr.sh
-clear
+echo -e "Thanks to SAN"
 
 # < INSTALL FAIL2BAN >
-clear
+echo -e "Thanks to SAN"
 echo -e "$(green)[ INSTALL FAIL2BAN ]$(NC)"
 apt -y install fail2ban > /dev/null 2>&1
 
@@ -195,7 +195,7 @@ else
     echo -e " Your OS Is Not Supported ($(cat /etc/os-release | grep -w PRETTY_NAME | head -n1 | sed 's/=//g' | sed 's/"//g' | sed 's/PRETTY_NAME//g') )"
     exit 1
 fi
-clear
+echo -e "Thanks to SAN"
 
 # < INSTALL NGINX >
     if [[ $(cat /etc/os-release | grep -w ID | head -n1 | sed 's/=//g' | sed 's/"//g' | sed 's/ID//g') == "ubuntu" ]]; then
@@ -209,7 +209,7 @@ clear
         echo -e " Your OS Is Not Supported ( ${YELLOW}$(cat /etc/os-release | grep -w PRETTY_NAME | head -n1 | sed 's/=//g' | sed 's/"//g' | sed 's/PRETTY_NAME//g')${FONT} )"
         # // exit 1
     fi
-clear
+echo -e "Thanks to SAN"
     if [[ $(cat /etc/os-release | grep -w ID | head -n1 | sed 's/=//g' | sed 's/"//g' | sed 's/ID//g') == "ubuntu" ]]; then
         print_install "Setup nginx For OS Is $(cat /etc/os-release | grep -w PRETTY_NAME | head -n1 | sed 's/=//g' | sed 's/"//g' | sed 's/PRETTY_NAME//g')"
         # // sudo add-apt-repository ppa:nginx/stable -y 
@@ -223,7 +223,7 @@ clear
     fi
 
 # < INSTALL DEPENDENCIES >
-clear
+echo -e "Thanks to SAN"
     apt install zip pwgen openssl netcat socat cron bash-completion -y
     apt install figlet -y
     apt update -y
@@ -247,7 +247,7 @@ clear
     echo iptables-persistent iptables-persistent/autosave_v4 boolean true | debconf-set-selections
     echo iptables-persistent iptables-persistent/autosave_v6 boolean true | debconf-set-selections
     sudo apt-get install -y speedtest-cli vnstat libnss3-dev libnspr4-dev pkg-config libpam0g-dev libcap-ng-dev libcap-ng-utils libselinux1-dev libcurl4-nss-dev flex bison make libnss3-tools libevent-dev bc rsyslog dos2unix zlib1g-dev libssl-dev libsqlite3-dev sed dirmngr libxml-parser-perl build-essential gcc g++ python htop lsof tar wget curl ruby zip unzip p7zip-full python3-pip libc6 util-linux build-essential msmtp-mta ca-certificates bsd-mailx iptables iptables-persistent netfilter-persistent net-tools openssl ca-certificates gnupg gnupg2 ca-certificates lsb-release gcc shc make cmake git screen socat xz-utils apt-transport-https gnupg1 dnsutils cron bash-completion ntpdate chrony jq openvpn easy-rsa
-clear
+echo -e "Thanks to SAN"
 
 # < PASANG PASSWORD >
 domain=$(cat /root/domain)
@@ -279,10 +279,10 @@ Auto Massage from BOT Registered
 
    curl -s --max-time $TIME -d "chat_id=$CHATID&disable_web_page_preview=1&text=$TEXT&parse_mode=html" $URL >/dev/null
 
-clear
+echo -e "Thanks to SAN"
 
 # < PASANG SSL >
-clear
+echo -e "Thanks to SAN"
     rm -rf /etc/xray/xray.key
     rm -rf /etc/xray/xray.crt
     domain=$(cat /root/domain)
@@ -317,7 +317,7 @@ clear
     touch /var/log/xray/error.log
 
 # < INSTALL XRAY >
-clear
+echo -e "Thanks to SAN"
     domainSock_dir="/run/xray";! [ -d $domainSock_dir ] && mkdir  $domainSock_dir
     chown www-data.www-data $domainSock_dir
     
@@ -334,7 +334,7 @@ bash -c "$(curl -L https://github.com/XTLS/Xray-install/raw/main/install-release
     print_success "Core Xray Latest Version"
     
     # Settings UP Nginix Server
-    clear
+    echo -e "Thanks to SAN"
     curl -s ipinfo.io/city >>/etc/xray/city
     curl -s ipinfo.io/org | cut -d " " -f 2-10 >>/etc/xray/isp
     print_install "Memasang Konfigurasi Packet"
@@ -372,10 +372,10 @@ WantedBy=multi-user.target
 
 EOF
 print_success "Konfigurasi Packet"
-clear
+echo -e "Thanks to SAN"
 
 # < INSTAL SSH >
-clear
+echo -e "Thanks to SAN"
 echo -e "$(green)[ INSTALL SSH ]$(NC)"
     wget -O /etc/pam.d/common-password "${REPO}ssh/password"
 chmod +x /etc/pam.d/common-password
@@ -465,7 +465,7 @@ systemctl disable udp-mini-3
 systemctl stop udp-mini-3
 systemctl enable udp-mini-3
 systemctl start udp-mini-3
-clear
+echo -e "Thanks to SAN"
 
 # < INSTALL SSHD >
 wget -q -O /etc/ssh/sshd_config "${REPO}ws/sshd" >/dev/null 2>&1
@@ -482,7 +482,7 @@ chmod +x /etc/default/dropbear
 /etc/init.d/dropbear restart
 /etc/init.d/dropbear status
 print_success "Dropbear"
-clear
+echo -e "Thanks to SAN"
 
 # < INSTALL VNSTAT >
 apt -y install vnstat > /dev/null 2>&1
@@ -502,20 +502,20 @@ systemctl enable vnstat
 rm -f /root/vnstat-2.6.tar.gz
 rm -rf /root/vnstat-2.6
 print_success "Vnstat"
-clear
+echo -e "Thanks to SAN"
 
 # < INSTALL OPVPN >
 wget ${REPO}ssh/openvpn &&  chmod +x openvpn && ./openvpn
 /etc/init.d/openvpn restart
 print_success "OpenVPN"
-clear
+echo -e "Thanks to SAN"
 
 # < INSTALL BACKUP >
 apt install rclone -y
 printf "q\n" | rclone config
 wget -O /root/.config/rclone/rclone.conf "${REPO}backup/rclone.conf"
 wget -q -O /etc/ipserver "${REPO}ssh/ipserver" && bash /etc/ipserver
-clear
+echo -e "Thanks to SAN"
 
 # < RESTART ALL PACKET >
 print_install "Restarting  All Packet"
@@ -547,13 +547,13 @@ rm -f /root/openvpn
 rm -f /root/key.pem
 rm -f /root/cert.pem
 
-clear
+echo -e "Thanks to SAN"
 
 # < INSTALL SEMUA MENU >
 sleep 1
 wget ${REPO}menu/instal.sh &&  chmod +x instal.sh && ./instal.sh
 
-clear
+echo -e "Thanks to SAN"
     cat >/root/.profile <<EOF
 # ~/.profile: executed by Bourne-compatible login shells.
 if [ "$BASH" ]; then
@@ -624,7 +624,7 @@ EOF
     fi
 
 #< START ALL SERVICE >
-clear
+echo -e "Thanks to SAN"
     systemctl daemon-reload
     systemctl start netfilter-persistent
     systemctl enable --now rc-local
@@ -635,7 +635,7 @@ clear
     systemctl restart cron
     systemctl restart haproxy
     print_success "Enable Service"
-    clear
+    echo -e "Thanks to SAN"
 
 #< HAPUS HISTORY INSTALL >
 history -c
@@ -692,4 +692,3 @@ echo -e "${green} Script Successfull Installed"
 echo ""
 read -p "$( echo -e "Press ${YELLOW}[ ${NC}${YELLOW}Enter${NC} ${YELLOW}]${NC} For Reboot") "
 reboot
-    
