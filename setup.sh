@@ -25,6 +25,8 @@ echo -e "---------------------------------------------------"
 echo ""
 
 # < DOMAIN >
+mkdir -p /etc/xray
+
 touch /usr/local/etc/xray/domain
 echo -e "————————————————————————————————————————"
 echo -e "     ${YB}Silahkan Masukkan Domain Kamu${NC}         "
