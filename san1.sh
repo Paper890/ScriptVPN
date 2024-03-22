@@ -40,11 +40,9 @@ echo "$dns" > /root/domain
 fi
 echo -e "Thanks to SAN"
 
-# < Install dependencies >
-apt install -y wget screen
+# < UPDATE REPO >
 apt update -y && apt upgrade -y
-apt install lolcat -y
-gem install lolcat
+apt install -y wget screen
 
 # < CEK OPERATING SYSTEM >
 if [[ $( uname -m | awk '{print $1}' ) == "x86_64" ]]; then
